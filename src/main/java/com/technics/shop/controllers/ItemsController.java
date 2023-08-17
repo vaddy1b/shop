@@ -2,14 +2,19 @@ package com.technics.shop.controllers;
 
 import com.technics.shop.constatnts.Path;
 import com.technics.shop.entity.Items;
-import com.technics.shop.entity.Showcase;
+import com.technics.shop.servises.ShowcaseServise;
+import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.UUID;
 
 @RestController
 @RequestMapping(Path.API_ITEMS)
+@RequiredArgsConstructor
 public class ItemsController {
+
+    private final ShowcaseServise showcaseServise;
+
 
     @GetMapping("/{id}")
     public Items getProduct(@PathVariable UUID id) {

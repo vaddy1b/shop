@@ -2,15 +2,18 @@ package com.technics.shop.controllers;
 
 import com.technics.shop.constatnts.Path;
 import com.technics.shop.entity.Showcase;
+import com.technics.shop.servises.ShowcaseServise;
+import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.UUID;
 
 @RestController
 @RequestMapping(Path.API_SHOWCASE)
+@RequiredArgsConstructor
 public class ShowcaseController {
 
-    private
+    private ShowcaseServise showcaseServise;
 
     @GetMapping("/{id}")
     public Showcase getShowcase(@PathVariable UUID id) {

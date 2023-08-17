@@ -10,6 +10,7 @@ import lombok.NoArgsConstructor;
 import lombok.ToString;
 
 import java.util.Date;
+import java.util.List;
 import java.util.UUID;
 
 @Entity
@@ -41,6 +42,10 @@ public class Showcase {
 
     @FutureOrPresent
     private Date lastUpdatedDate;
+
+    @OneToMany(cascade = CascadeType.ALL,fetch = FetchType.LAZY)
+    @JoinColumn(name = "items_id")
+    private List <Items> itemsList;
 
     public Showcase(String name, String address, String type, Date creationDate, Date lastUpdatedDate) {
         this.name = name;
