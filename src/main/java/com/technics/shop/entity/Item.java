@@ -16,7 +16,7 @@ import java.util.UUID;
 @NoArgsConstructor
 @ToString
 @Table(name = "items")
-public class Items {
+public class Item {
 
     @Id
     @SequenceGenerator(name = "items_seq", sequenceName = "items_seq", allocationSize = 1)
@@ -44,7 +44,7 @@ public class Items {
     private Date additionDate;
     private Date modificationDate;
 
-    public Items(UUID showcaseId, int position, String name, String type, double price, Date additionDate, Date modificationDate) {
+    public Item(UUID showcaseId, int position, String name, String type, double price, Date additionDate, Date modificationDate) {
         this.showcaseId = showcaseId;
         this.position = position;
         this.name = name;

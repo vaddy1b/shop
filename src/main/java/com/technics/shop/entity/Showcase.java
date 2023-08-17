@@ -45,7 +45,7 @@ public class Showcase {
 
     @OneToMany(cascade = CascadeType.ALL,fetch = FetchType.LAZY)
     @JoinColumn(name = "items_id")
-    private List <Items> itemsList;
+    private List <Item> itemsList;
 
     public Showcase(String name, String address, String type, Date creationDate, Date lastUpdatedDate) {
         this.name = name;
