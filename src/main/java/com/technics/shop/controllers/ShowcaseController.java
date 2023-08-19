@@ -12,17 +12,14 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.Date;
 import java.util.List;
-import java.util.UUID;
 
 @RestController
 @RequestMapping(Path.API_SHOWCASE)
 @RequiredArgsConstructor
 public class ShowcaseController {
 
-    private ShowcaseServiseImpl showcaseServise;
-
     @Autowired
-    private ShowcaseServiseImpl vitrineService;
+    private ShowcaseServiseImpl showcaseService;
 
     @GetMapping
     public ResponseEntity<List<Showcase>> getAllVitrines(@RequestParam(required = false) String type,
@@ -31,53 +28,53 @@ public class ShowcaseController {
                                                          @RequestParam(required = false) Date createdTo,
                                                          @RequestParam(required = false) Date updatedFrom,
                                                          @RequestParam(required = false) Date updatedTo) {
-        List<Showcase> vitrines = vitrineService.getAllShowcases(type, address, createdFrom, createdTo, updatedFrom, updatedTo);
+        List<Showcase> vitrines = showcaseService.getAllShowcases(type, address, createdFrom, createdTo, updatedFrom, updatedTo);
         return new ResponseEntity<>(vitrines, HttpStatus.OK);
     }
 
     @GetMapping("/{vitrineId}/products")
-    public ResponseEntity<List<Item>> getAllProductsInVitrine(@PathVariable Long vitrineId,
-                                                                 @RequestParam(required = false) String productType,
+    public ResponseEntity<List<Item>> getAllItemsInShowcase(@PathVariable Long showcaseId,
+                                                                 @RequestParam(required = false) String itemType,
                                                                  @RequestParam(required = false) Double minPrice,
                                                                  @RequestParam(required = false) Double maxPrice) {
-        List<Item> products = vitrineService.getAllProductsInShowcase(vitrineId, productType, minPrice, maxPrice);
+        List<Item> products = showcaseService.getAllProductsInShowcase(showcaseId, itemType, minPrice, maxPrice);
         return new ResponseEntity<>(products, HttpStatus.OK);
     }
 
     @PostMapping
-    public ResponseEntity<Showcase> addVitrine(@RequestBody Showcase vitrine) {
-        Showcase createdVitrine = vitrineService.addShowcase(vitrine);
+    public ResponseEntity<Showcase> addShowcase(@RequestBody Showcase showcase) {
+        Showcase createdVitrine = showcaseService.addShowcase(showcase);
         return new ResponseEntity<>(createdVitrine, HttpStatus.CREATED);
     }
 
     @PostMapping("/{vitrineId}/products")
-    public ResponseEntity<Item> addProductToVitrine(@PathVariable Long vitrineId, @RequestBody Item product) {
-        Item createdProduct = vitrineService.addProductToShowcase(vitrineId, product);
+    public ResponseEntity<Item> addItemToShowcase(@PathVariable Long showcaseId, @RequestBody Item item) {
+        Item createdProduct = showcaseService.addProductToShowcase(showcaseId, item);
         return new ResponseEntity<>(createdProduct, HttpStatus.CREATED);
     }
 
     @PutMapping("/{vitrineId}")
-    public ResponseEntity<Showcase> updateVitrine(@PathVariable Long vitrineId, @RequestBody Showcase vitrine) {
-        Showcase updatedVitrine = vitrineService.updateVitrine(vitrineId, vitrine);
+    public ResponseEntity<Showcase> updateShowcase(@PathVariable Long showcaseId, @RequestBody Showcase showcase) {
+        Showcase updatedVitrine = showcaseService.updateShowcase(showcaseId, showcase);
         return new ResponseEntity<>(updatedVitrine, HttpStatus.OK);
     }
 
     @PutMapping("/{vitrineId}/products/{productId}")
-    public ResponseEntity<Item> updateProduct(@PathVariable Long vitrineId, @PathVariable Long productId,
-                                              @RequestBody Item product) {
-        Item updatedProduct = vitrineService.updateProduct(vitrineId, productId, product);
+    public ResponseEntity<Item> updateItem(@PathVariable Long showcaseId, @PathVariable Long itemId,
+                                              @RequestBody Item item) {
+        Item updatedProduct = showcaseService.updateProduct(showcaseId, itemId, item);
         return new ResponseEntity<>(updatedProduct, HttpStatus.OK);
     }
 
     @DeleteMapping("/{vitrineId}")
-    public ResponseEntity<Void> deleteVitrine(@PathVariable Long vitrineId) {
-        vitrineService.deleteShowcase(vitrineId);
+    public ResponseEntity<Void> deleteShowcase(@PathVariable Long showcaseId) {
+        showcaseService.deleteShowcase(showcaseId);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 
     @DeleteMapping("/{vitrineId}/products/{productId}")
-    public ResponseEntity<Void> deleteProduct(@PathVariable Long vitrineId, @PathVariable Long productId) {
-        vitrineService.deleteItem(vitrineId, productId);
+    public ResponseEntity<Void> deleteItem(@PathVariable Long showcaseId, @PathVariable Long itemId) {
+        showcaseService.deleteItem(showcaseId, itemId);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 }

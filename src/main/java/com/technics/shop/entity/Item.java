@@ -23,7 +23,7 @@ public class Item {
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "items_seq")
     private UUID id;
 
-    @ManyToOne(cascade = CascadeType.ALL,fetch = FetchType.LAZY, mappedBy = "item_id")
+    @ManyToOne(cascade = CascadeType.ALL,fetch = FetchType.LAZY)
     private UUID showcaseId;
 
     @NotNull
