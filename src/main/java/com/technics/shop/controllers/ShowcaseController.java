@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.Date;
 import java.util.List;
-import java.util.UUID;
 
 @RestController
 @RequestMapping(Path.API_SHOWCASE)
@@ -21,7 +20,6 @@ public class ShowcaseController {
 
     private ShowcaseServiseImpl showcaseServise;
 
-    @Autowired
     private ShowcaseServiseImpl vitrineService;
 
     @GetMapping
