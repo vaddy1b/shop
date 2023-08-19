@@ -7,6 +7,7 @@ import jakarta.validation.constraints.Size;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
+import org.springframework.web.bind.annotation.Mapping;
 
 import java.util.Date;
 import java.util.UUID;
@@ -23,8 +24,8 @@ public class Item {
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "items_seq")
     private UUID id;
 
-    @ManyToOne(cascade = CascadeType.ALL,fetch = FetchType.LAZY, mappedBy = "item_id")
-    private UUID showcaseId;
+    @ManyToOne(cascade = CascadeType.ALL,fetch = FetchType.LAZY)
+    private Long showcaseId;
 
     @NotNull
     @Size(min = 1)
@@ -44,7 +45,7 @@ public class Item {
     private Date additionDate;
     private Date modificationDate;
 
-    public Item(UUID showcaseId, int position, String name, String type, double price, Date additionDate, Date modificationDate) {
+    public Item(Long showcaseId, int position, String name, String type, double price, Date additionDate, Date modificationDate) {
         this.showcaseId = showcaseId;
         this.position = position;
         this.name = name;
